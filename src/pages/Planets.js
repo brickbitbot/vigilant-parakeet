@@ -86,18 +86,16 @@ export default function Planets() {
         generateData(planets.results)
     }, [planets.results])
 
-    const goToFilms = (data) => () => {
-        loadMultiple(data).then(res => {
-            dispatch(loadFilmsSuccess(res))
-            history.push('/films')
-        })        
+    const goToFilms = (data) => async () => {
+        const films = await loadMultiple(data);
+        dispatch(loadFilmsSuccess(films));
+        history.push('/films');
     }
 
-    const goToResidents = (data) => () => {
-        loadMultiple(data).then(res => {
-            dispatch(loadResidentsSuccess(res));
-            history.push('/residents')
-        })
+    const goToResidents = (data) => async () => {
+        const residents = await loadMultiple(data);
+        dispatch(loadResidentsSuccess(residents));
+        history.push('/residents');
     }
 
     const goToDetail = (data) => () => {

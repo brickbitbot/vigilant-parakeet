@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Grid from '../components/Grid';
 
-export default function Residents () {
-    const planets = useSelector((state) => state.planets);
-    const [header, setHeader] = useState([
+export default function Residents() {
+    const residents = useSelector(state => state.residents);
+    const header = [
         "name",
         "height",
         "mass",
@@ -18,11 +18,11 @@ export default function Residents () {
         "species",
         "vehicles",
         "starships",
+    ];
 
-    ]);
-     return (
+    return (
          <div>
-             <Grid title="Star Wars Residents" header={header} data={planets.residents} />
+             <Grid title="Star Wars Residents" header={header} data={residents} />
              <Link to="/">
                 <p>Back to Planets</p>
             </Link>

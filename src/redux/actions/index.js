@@ -7,20 +7,20 @@ import {
 
 export const loadPlanetsSuccess = (count, next, previous, results) => ({
     type: LOAD_PLANETS_SUCCESS,
-    payload: {count, next, previous, results}
-})
+    payload: { count, next, previous, results },
+});
 
 export const loadFilmsSuccess = (films) => ({
     type: LOAD_FILMS_SUCCESS,
-    payload: {films}
-})
+    payload: { films },
+});
 
 export const loadResidentsSuccess = (residents) => ({
     type: LOAD_RESIDENTS_SUCCESS,
-    payload: {residents}
-})
+    payload: { residents },
+});
 
 export const loadDetailSuccess = (data) => ({
     type: LOAD_DETAIL_SUCCESS,
-    payload: {data}
-})
+    payload: { data },
+});
