@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadPlanetsSuccess, loadFilmsSuccess, loadResidentsSuccess, loadDetailSuccess } from '../redux/actions';
-import { getDataFromSingleApi, getDataFromApiArray } from '../service'
+import { loadSingle, loadMultiple } from '../service'
 import { Grid, Modal } from '../components';
 
 export default function Planets() {
@@ -74,25 +74,27 @@ export default function Planets() {
     ];
 
     useEffect(() => {
-        getDataFromSingleApi("https://swapi.dev/api/planets").then((data) => {            
+        const loadPlanets = async () => {
+            const data = await loadSingle("https://swapi.dev/api/planets");
             dispatch(loadPlanetsSuccess(data.count, data.next, data.previous, data.results))                          
-        }); 
-             
-    },[]);
+        }
+
+        loadPlanets();
+    }, []);
 
     useEffect(()=>{
         generateData(planets.results)
     }, [planets.results])
 
     const goToFilms = (data) => () => {
-        getDataFromApiArray(data).then(res => {
+        loadMultiple(data).then(res => {
             dispatch(loadFilmsSuccess(res))
             history.push('/films')
         })        
     }
 
     const goToResidents = (data) => () => {
-        getDataFromApiArray(data).then(res => {
+        loadMultiple(data).then(res => {
             dispatch(loadResidentsSuccess(res));
             history.push('/residents')
         })

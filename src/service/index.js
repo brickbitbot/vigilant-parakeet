@@ -1,26 +1,14 @@
 import axios from 'axios';
 
-export const getDataFromSingleApi = (api) => {
-    let res = axios.get(api).then((res) => 
-        res.data
-    )
-    .catch((error) =>
-        error
-    );
-    return res;
+export const loadSingle = async (url) => {
+    let response = await axios.get(url);
+    return response.data;
 }
 
-export const getDataFromApiArray = async (array) => {
-    let films = [];
-    for( let i in array) {
-        let item = await axios.get(array[i]).then((res) => 
-            res.data
-        )
-        .catch((error) =>
-            error
-        );
-        films.push(item)
-    }
-    console.log(films)
-    return films;
+export const loadMultiple = async (urls) => {
+    const responses = await Promise.all(
+        urls.map(url => axios.get(url))
+    );
+    const results = responses.map(response => response.data);
+    return results;
 }
